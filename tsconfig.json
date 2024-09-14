@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "lib": ["es2015", "es2019", "es2020", "dom"],
+    "types": ["node"],
+    "noEmitHelpers": false
+  },
+  "exclude": ["node_modules"]
+}
