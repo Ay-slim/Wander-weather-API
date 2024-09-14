@@ -6,7 +6,7 @@ A simple app to fetch weather temperature data efficiently from an API by cachin
 
 ## Installation and local setup
 
-- Clone this repo
+- Clone this repo (ssh: `git clone git@github.com:Ay-slim/Wander-weather-API.git` or https: `https://github.com/Ay-slim/Wander-weather-API.git`)
 - Ensure you have the docker daemon running on your machine either via the terminal or docker desktop
 - Run the `docker build -t wander_weather .` command at your terminal or cmd line to build a container named wander_weather
 - Run the `docker run -p 8080:8080 wander_weather` command to start the app.
