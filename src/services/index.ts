@@ -1,5 +1,9 @@
 import axios from "axios";
 import ErrorResponse from "../utils/ErrorResponse";
+import {
+  ValidatedApiResponseType,
+  WeatherApiResponseType,
+} from "../utils/types";
 
 export const farhenheitToCelsius = (fahrenheit: number): number => {
   return ((fahrenheit - 32) * 5) / 9;
@@ -9,13 +13,6 @@ export const celsiusToFahrenheit = (celsius: number): number => {
   return (celsius * 9) / 5 + 32;
 };
 
-type WeatherApiResponseType = {
-  [key in "celcius" | "fahrenheit"]: number;
-};
-type ValidatedApiResponseType = {
-  celcius: number;
-  fahrenheit: number;
-};
 const response_handler = (
   api_response: WeatherApiResponseType,
 ): ValidatedApiResponseType => {
