@@ -7,7 +7,7 @@ import {
   fetchCachedTemperature,
 } from "./cache";
 
-const weather_api_service = async (
+export const weather_api_service = async (
   city: string,
   date: string,
   cache_expiry: number,
@@ -38,8 +38,4 @@ const weather_api_service = async (
     celcius: live_temperature.celcius.toFixed(2),
     fahrenheit: live_temperature.fahrenheit.toFixed(2),
   };
-};
-
-export default {
-  weather_api_service,
 };
