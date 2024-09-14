@@ -19,12 +19,12 @@ export const convert_temperature_units = (
     return {
       ...api_response,
       fahrenheit: celsius_to_fahrenheit(api_response.celcius),
-    };
+    } as ValidatedApiResponseType;
   }
   return {
     ...api_response,
     celcius: farhenheit_to_celsius(api_response.fahrenheit),
-  };
+  } as ValidatedApiResponseType;
 };
 
 const fetch_weather_from_api = async (city: string, date: string) => {

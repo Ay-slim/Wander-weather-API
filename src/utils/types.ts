@@ -1,5 +1,6 @@
 export type WeatherApiResponseType = {
-  [key in "celcius" | "fahrenheit"]: number;
+  celcius?: number;
+  fahrenheit?: number;
 };
 export type ValidatedApiResponseType = {
   celcius: number;
