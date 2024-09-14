@@ -3,15 +3,15 @@ import { ValidatedApiResponseType, WeatherApiResponseType } from "./types";
 import { ErrorResponse } from "./error_response";
 import { API_URL, CUSTOM_ERROR_PREFIX } from "./constants";
 
-const farhenheit_to_celsius = (fahrenheit: number): number => {
+export const farhenheit_to_celsius = (fahrenheit: number): number => {
   return ((fahrenheit - 32) * 5) / 9;
 };
 
-const celsius_to_fahrenheit = (celsius: number): number => {
+export const celsius_to_fahrenheit = (celsius: number): number => {
   return (celsius * 9) / 5 + 32;
 };
 
-const convert_temperature_units = (
+export const convert_temperature_units = (
   api_response: WeatherApiResponseType,
 ): ValidatedApiResponseType => {
   const currentUnit = Object.keys(api_response)?.[0];
