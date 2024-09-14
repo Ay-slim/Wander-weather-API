@@ -1,7 +1,6 @@
 import express from "express";
 import appRouter from "./routes";
-
-const PORT = 9000;
+import { PORT } from "./utils/constants";
 
 const app = express();
 
