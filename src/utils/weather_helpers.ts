@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ValidatedApiResponseType, WeatherApiResponseType } from "./types";
-import ErrorResponse from "./error_response";
-import { API_URL } from "./constants";
+import { ErrorResponse } from "./error_response";
+import { API_URL, CUSTOM_ERROR_PREFIX } from "./constants";
 
 const farhenheit_to_celsius = (fahrenheit: number): number => {
   return ((fahrenheit - 32) * 5) / 9;
@@ -39,7 +39,7 @@ const fetch_weather_from_api = async (city: string, date: string) => {
     throw response.data;
   } catch (err) {
     throw new ErrorResponse(
-      "Our providers are down at the moment. Please try again later",
+      `${CUSTOM_ERROR_PREFIX}Our providers are down at the moment. Please try again later`,
       500,
       err,
     );
