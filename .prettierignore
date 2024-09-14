@@ -3,3 +3,5 @@ node_modules
 .prettierignore
 .eslint*
 .env.example
+.dockerignore
+Dockerfile
