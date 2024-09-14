@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ValidatedApiResponseType, WeatherApiResponseType } from "./types";
 import ErrorResponse from "./error_response";
+import { API_URL } from "./constants";
 
 const farhenheit_to_celsius = (fahrenheit: number): number => {
   return ((fahrenheit - 32) * 5) / 9;
@@ -28,13 +29,10 @@ const convert_temperature_units = (
 
 const fetch_weather_from_api = async (city: string, date: string) => {
   try {
-    const response = await axios.post(
-      `https://staging.v4.api.wander.com/hiring-test/weather`,
-      {
-        city,
-        date,
-      },
-    );
+    const response = await axios.post(API_URL, {
+      city,
+      date,
+    });
     if (response.status === 200) {
       return convert_temperature_units(response.data);
     }
