@@ -1,12 +1,17 @@
 import { db } from "../database";
 import { ValidatedApiResponseType } from "../utils/types";
 
-export const fetchTemperature = (city: string, date: string) => {
-  return new Promise((resolve, reject) => {
+type DatabaseWeatherResponse = {
+  temperature: string;
+  cache_time: number;
+} | null;
+
+export const fetchCachedTemperature = (city: string, date: string) => {
+  return new Promise<DatabaseWeatherResponse>((resolve, reject) => {
     db.get(
-      "SELECT * FROM temperature_cache WHERE city = ? AND date = ?",
-      [city, date],
-      (err, row) => {
+      "SELECT temperature, cache_time FROM temperature_cache WHERE city = ? AND date = ? ORDER BY cache_time DESC LIMIT 1",
+      [city.trim().toLowerCase(), date],
+      (err, row: DatabaseWeatherResponse) => {
         if (err) reject(err);
         resolve(row || null);
       },
@@ -23,7 +28,12 @@ export const cacheTemperature = (
     const cache_time = new Date().getTime();
     db.run(
       "INSERT INTO temperature_cache (city, date, temperature, cache_time) VALUES (?, ?, ?, ?)",
-      [city, date, JSON.stringify(temperature), cache_time],
+      [
+        city.trim().toLowerCase(),
+        date,
+        JSON.stringify(temperature),
+        cache_time,
+      ],
       (err) => {
         if (err) reject(err);
         resolve();
@@ -32,11 +42,15 @@ export const cacheTemperature = (
   });
 };
 
-export const deleteExpiredCache = async (city: string, date: string) => {
+export const deleteExpiredCache = async (
+  city: string,
+  date: string,
+  cache_time: number,
+) => {
   return new Promise<void>((resolve, reject) => {
     db.run(
-      "DELETE FROM temperature_cache WHERE city = ? AND date = ?",
-      [city, date],
+      "DELETE FROM temperature_cache WHERE city = ? AND date = ? AND cache_time = ?",
+      [city.trim().toLowerCase(), date, cache_time],
       (err) => {
         if (err) reject(err);
         resolve();
