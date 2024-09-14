@@ -23,7 +23,8 @@ A simple app to fetch weather temperature data efficiently from an API by cachin
 #### Request and response structure
 
 - Successful request:
-  Body:
+
+Body:
 
 ```
 {
@@ -48,7 +49,8 @@ Response:
 ```
 
 - Failed Request:
-  Body:
+
+Body:
 
 ```
 {
@@ -70,7 +72,7 @@ Response:
 
 ### Temperature conversion:
 
-- The API being called either returns the temperature in celsius or fahrenheit. This app converts a conversion and returns both units.
+- The API being called either returns the temperature in celsius or fahrenheit. This app normalizes the data and returns both units.
 
 ## Caching
 
@@ -81,7 +83,7 @@ Response:
 
 - There were two approaches considered in implementing caching:
   1. Running a cron job (which would be run by a background worker if this was a production environment) that would periodically check the db and delete any data stored in the cache beyond the cache expiry period
-  2. For every request to the app, check the cache for any existing data, if expired, delete the data, make an API call, and cache the new response for subsequent requests to use. A cache_time integer value is stored alongside the data and used to check for staleness when the next request is made
+  2. For every request to the app, check the cache for any existing data, if expired, delete the data, make an API call, and cache the new response for subsequent requests to use. A cache_time integer value representing the time caching occurred is stored alongside the data and used to check for staleness when the next request is made
 
 ### Pros and cons of the two alternatives
 
