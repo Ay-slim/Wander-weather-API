@@ -26,7 +26,7 @@ export const weather_api_service = async (
         fahrenheit: fahrenheit.toFixed(2),
       };
     }
-    await deleteExpiredCache(city, date, cached_data.cache_time).catch((err) =>
+    deleteExpiredCache(city, date, cached_data.cache_time).catch((err) =>
       console.log(`${DATABASE_ERROR} cache delete ==> ${err}`),
     );
   }
