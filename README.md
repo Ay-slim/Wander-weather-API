@@ -106,6 +106,6 @@ Response:
 
 ## Testing
 
-- The Jest library was used for testing each of the temeperature conversion utils individually as well as the full service data fetch service, caching, and error handling
+- The Jest library was used for testing each of the temeperature conversion utils individually as well as the full fetch service, caching, and error handling
 
 ![alt text](<Screenshot 2024-09-15 at 12.07.50 PM.png>)
