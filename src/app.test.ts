@@ -62,8 +62,8 @@ describe("Test Caching", () => {
   });
 });
 
-describe("Test caching service end to end", () => {
-  test("Full cache test 5 seconds expiry", async () => {
+describe("Test system logic end to end (data fetch + caching)", () => {
+  test("Full system test with 5 seconds cache expiry simulation", async () => {
     await weather_api_service("ife", "2024-03-01", 5000);
     const { temperature: existingTemp, cache_time } =
       await fetchCachedTemperature("ife", "2024-03-01");
@@ -86,7 +86,6 @@ describe("Test error handling", () => {
       await fetch_weather_from_api("okokomaiko", "2024-30-01");
     } catch (err) {
       const error_value = error_handler(err, null, true);
-      console.log(error_value);
       expect(error_value).toBeInstanceOf(Object);
       expect(error_value.status).toBe(500);
       expect(error_value.message).toBe(
