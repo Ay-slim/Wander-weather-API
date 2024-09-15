@@ -23,12 +23,13 @@ A simple app to fetch weather temperature data efficiently from an API by cachin
 #### Request and response structure
 
 - Successful request:
-  Body:
+
+Body:
 
 ```
 {
     "city": "Ohio",
-    "date": "2024-50-15"
+    "date": "2024-05-15"
 }
 ```
 
@@ -48,7 +49,8 @@ Response:
 ```
 
 - Failed Request:
-  Body:
+
+Body:
 
 ```
 {
@@ -70,18 +72,18 @@ Response:
 
 ### Temperature conversion:
 
-- The API being called either returns the temperature in celsius or fahrenheit. This app converts a conversion and returns both units.
+- The API being called either returns the temperature in celsius or fahrenheit. This app normalizes the data and returns both units.
 
 ## Caching
 
-- An SQLite document database was used to cache the API data to prevent getting rate limited. This was done by saving temperature data to SQLite on the first API call, and subsequent calls with the same city and date request values are fetched from the DB. A cache expiry config value specifies how long data can be cached before being considered stale and removed from the cache (for this app, it's set to one hour for now, you can play around with this by changing CACHE_EXPIRY variable value at `src/utils/constants.ts`).
+- An SQLite file database was used to cache the API data to prevent getting rate limited. This was done by saving temperature data to SQLite on the first API call, and subsequent calls with the same city and date request values are fetched from the DB. A cache expiry config value specifies how long data can be cached before being considered stale and removed from the cache (for this app, it's set to one hour for now, you can play around with this by changing CACHE_EXPIRY variable value at `src/utils/constants.ts`).
 - Caching improved the performance by reducing the query response time from between 800ms and 1 second to an average of 4 to 5ms for cached requests
 
 ### Technical considerations for caching
 
 - There were two approaches considered in implementing caching:
   1. Running a cron job (which would be run by a background worker if this was a production environment) that would periodically check the db and delete any data stored in the cache beyond the cache expiry period
-  2. For every request to the app, check the cache for any existing data, if expired, delete the data, make an API call, and cache the new response for subsequent requests to use. A cache_time integer value is stored alongside the data and used to check for staleness when the next request is made
+  2. For every request to the app, check the cache for any existing data, if expired, delete the data, make an API call, and cache the new response for subsequent requests to use. A cache_time integer value representing the time caching occurred is stored alongside the data and used to check for staleness when the next request is made
 
 ### Pros and cons of the two alternatives
 
