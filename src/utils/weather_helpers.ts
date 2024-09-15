@@ -13,7 +13,9 @@ export const celsius_to_fahrenheit = (celsius: number): number => {
 
 export const convert_temperature_units = (
   api_response: WeatherApiResponseType,
+  test = false,
 ): ValidatedApiResponseType => {
+  if (test) throw new Error("Test unhandled error");
   const currentUnit = Object.keys(api_response)?.[0];
   if (currentUnit === "celcius") {
     return {
