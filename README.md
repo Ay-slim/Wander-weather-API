@@ -76,7 +76,7 @@ Response:
 
 ## Caching
 
-- An SQLite document database was used to cache the API data to prevent getting rate limited. This was done by saving temperature data to SQLite on the first API call, and subsequent calls with the same city and date request values are fetched from the DB. A cache expiry config value specifies how long data can be cached before being considered stale and removed from the cache (for this app, it's set to one hour for now, you can play around with this by changing CACHE_EXPIRY variable value at `src/utils/constants.ts`).
+- An SQLite file database was used to cache the API data to prevent getting rate limited. This was done by saving temperature data to SQLite on the first API call, and subsequent calls with the same city and date request values are fetched from the DB. A cache expiry config value specifies how long data can be cached before being considered stale and removed from the cache (for this app, it's set to one hour for now, you can play around with this by changing CACHE_EXPIRY variable value at `src/utils/constants.ts`).
 - Caching improved the performance by reducing the query response time from between 800ms and 1 second to an average of 4 to 5ms for cached requests
 
 ### Technical considerations for caching
