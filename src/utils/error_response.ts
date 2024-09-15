@@ -20,21 +20,18 @@ export const error_handler = (
     error_id,
     error: error?.stack || error,
   });
-  if (test) {
-    return {
-      status: error?.statusCode || 500,
-      success: false,
-      message: error?.message?.startsWith(CUSTOM_ERROR_PREFIX)
-        ? error?.message
-        : GENERIC_ERROR,
-      error_id,
-    };
-  }
-  res.status(error?.statusCode || 500).json({
+  const error_packet = {
     success: false,
     message: error?.message?.startsWith(CUSTOM_ERROR_PREFIX)
       ? error?.message
-      : "Something went wrong. We're working on it",
+      : GENERIC_ERROR,
     error_id,
-  });
+  };
+  if (test) {
+    return {
+      ...error_packet,
+      status: error?.statusCode || 500,
+    };
+  }
+  res.status(error?.statusCode || 500).json(error_packet);
 };
